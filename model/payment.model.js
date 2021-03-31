@@ -12,7 +12,7 @@ const Payment = function (payment) {
 };
 
 Payment.findAll = result => {
-    sql.query("Select * from payment oder by pay_date DESC", (err, res) => {
+    sql.query("Select * from payment order by pay_date desc ", (err, res) => {
         if (err) {
             console.log("Error", err);
             result(null, err);

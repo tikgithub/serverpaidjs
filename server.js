@@ -1,13 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-var admin = require('firebase-admin');
-var serviceAccount = require('./config/mypaied-firebase-adminsdk-mvxb4-f584f6f949.json');
-
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://mypaied-default-rtdb.firebaseio.com"
-});
 
 const app = express();
 
@@ -20,6 +13,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.get('/',(req,res)=>{
     res.json({message:'NodeJS Server is ready to use'});
 });
+
 
 require('./route/route.js')(app);
 //Setting up the server port
