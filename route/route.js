@@ -22,7 +22,12 @@ module.exports = app => {
             return res.send({ message: "Token is invalid, please check again", status: 401, description: "Un-Authorization Token" });
         }
         //Check with google Firebase for verify the token
-        authorization=authorization.substring(7,authorization.length);
+        try {
+            
+            authorization=authorization.substring(7,authorization.length);
+        } catch (error) {
+            return res.status(401).send({ message: "Token is invalid, please check again", status: 401, description: "Un-Authorization Token"});
+        }
 
         admin.auth().verifyIdToken(authorization).then((decodedToken)=>{
             const uid = decodedToken.uid;
@@ -40,11 +45,11 @@ module.exports = app => {
     });
 
     //Payment Routing
-    app.get("/api/payments", interceptFunc, paymentController.findAll);
+    app.get("/api/payments", paymentController.findAll);
     app.post("/api/payment", interceptFunc, paymentController.create);
     app.get("/api/payment/:id", interceptFunc, paymentController.findById);
     app.delete("/api/payment/:id", interceptFunc, paymentController.delete);
-    app.get("/api/payment/:offset/:rowcount", interceptFunc, paymentController.getPageInation);
+    app.get("/api/payment/:offset/:rowcount", paymentController.getPageInation);
 
     //Register route
     app.post("/api/register", registerController.create);
