@@ -33,7 +33,6 @@ module.exports = app => {
             const uid = decodedToken.uid;
             console.log("UID for token " + uid);
             //get email from token
-            console.log("Email: " + decodedToken.email);
             res.locals.emailSession = decodedToken.email;
             next();
             
@@ -45,8 +44,9 @@ module.exports = app => {
     });
 
     //Payment Routing
-    app.get("/api/payments", paymentController.findAll);
+    app.get("/api/payments", interceptFunc ,paymentController.findAll);
     app.post("/api/payment", interceptFunc, paymentController.create);
+    app.get("/api/payment/total_month/", interceptFunc, paymentController.totalMonthlyPay);
     app.get("/api/payment/:id", interceptFunc, paymentController.findById);
     app.delete("/api/payment/:id", interceptFunc, paymentController.delete);
     app.get("/api/payment/:offset/:rowcount", paymentController.getPageInation);

@@ -11,14 +11,27 @@ const Payment = function (payment) {
     this.amount = payment.amount;
 };
 
-Payment.findAll = result => {
-    sql.query("Select * from payment order by pay_date desc ", (err, res) => {
+Payment.findAll = (email, result) => {
+    sql.query("Select * from payment  Where email = ? order by pay_date desc",email, (err, res) => {
         if (err) {
             console.log("Error", err);
             result(null, err);
             return;
         }
         console.log(null, res);
+        result(null, res);
+    });
+};
+
+Payment.totalMonthlyPay = (email, result) => {
+    console.log(email);
+    sql.query("SELECT sum(amount) as total, month(curdate()) as _month FROM freedbtech_mypaiddb.payment where month(pay_date) = month(curdate()) and email = ? ",email, (err, res) => {
+        if(err){
+            console.log("Error", err);
+            result(null, err);
+            return;
+        }
+        console.log(null,res);
         result(null, res);
     });
 }
