@@ -49,7 +49,7 @@ module.exports = app => {
     app.get("/api/payment/total_month/", interceptFunc, paymentController.totalMonthlyPay);
     app.get("/api/payment/:id", interceptFunc, paymentController.findById);
     app.delete("/api/payment/:id", interceptFunc, paymentController.delete);
-    app.get("/api/payment/:offset/:rowcount", paymentController.getPageInation);
+    app.get("/api/payment/:offset/:rowcount", interceptFunc ,paymentController.getPageInation);
     
 
     //Register route

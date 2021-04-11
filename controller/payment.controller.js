@@ -12,7 +12,8 @@ exports.findAll = (req, res) => {
 };
 
 exports.getPageInation = (req, res) => {
-    Payment.getPageInation([req.params, res.locals.emailSession], (err, data) => {
+    let email = res.locals.emailSession;
+    Payment.getPageInation([req.params, email], (err, data) => {
         if (err) res.status(500).send({
             message: "Error " || err.message
         });
