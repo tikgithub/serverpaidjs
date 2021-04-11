@@ -36,10 +36,30 @@ Payment.totalMonthlyPay = (email, result) => {
     });
 }
 
-Payment.getPageInation = ([params], result) => {
+Payment.getPageInation = ([params, email], result) => {
 
-    sql.query("SELECT * FROM payment order by pay_date DESC limit ?,?;",
+    sql.query("SELECT * FROM payment Where email =? order by pay_date DESC limit ?,?;",
         [
+            email,
+            parseInt(params.offset),
+            parseInt(params.rowcount)
+        ],
+        (err, data) => {
+            if (err) {
+                console.log("Erorr ", err);
+                result(null, err);
+                return;
+            }
+            console.log(data);
+            result(null, data);
+        });
+}
+
+Payment.getPageInation = ([params, email], result) => {
+
+    sql.query("SELECT * FROM payment Where email = ? and pay_date between ? and ? order by pay_date ",
+        [
+            email,
             parseInt(params.offset),
             parseInt(params.rowcount)
         ],
