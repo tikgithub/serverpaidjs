@@ -21,6 +21,16 @@ exports.getPageInation = (req, res) => {
     });
 };
 
+exports.getDataByDate = (req, res) =>{
+    let email = res.locals.emailSession;
+    Payment.getDataByDate([req.params, email],(err,data) =>{
+        if(err) res.status(500).send({
+            message: "Error " || err.message
+        })
+        else res.json(data);
+    });
+};
+
 exports.totalMonthlyPay = (req, res) => {
     let email = res.locals.emailSession;
     Payment.totalMonthlyPay(email, (err, data) => {
