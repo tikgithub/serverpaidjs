@@ -60,7 +60,7 @@ Payment.getDataByDate = async ([params, email], result) => {
     console.log(newFromDate, newToDate);
 
     var dataLists = new Promise(resolve => {
-        sql.query("SELECT * FROM payment Where email = ? and pay_date between ? and ? order by pay_date ",
+        sql.query("SELECT * FROM payment Where email = ? and pay_date between ? and ? order by pay_date DESC",
             [
                 email,
                 newFromDate,
