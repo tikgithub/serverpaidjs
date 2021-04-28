@@ -51,6 +51,7 @@ module.exports = app => {
     app.delete("/api/payment/:id", interceptFunc, paymentController.delete);
     app.get("/api/payment/:offset/:rowcount", interceptFunc ,paymentController.getPageInation);
     app.get("/api/payment/search/:fromdate/:todate", interceptFunc ,paymentController.getDataByDate);
+    app.put("/api/payment/:id", interceptFunc, paymentController.update);
     
 
     //Register route

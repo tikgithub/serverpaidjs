@@ -78,3 +78,29 @@ exports.create = (req, res) => {
         }
     });
 };
+
+exports.update = (req, res) => {
+    let email = res.locals.emailSession;
+    if(!req.body){
+        res.status(400).send({message:"Content Type Problem!!"});
+    }
+
+    //Create Payment Object
+    const payment = new Payment({
+        email : this.email,
+        item : req.body.item,
+        pay_date : req.body.pay_date,
+        detail: req.body.detail,
+        photo: req.body.photo,
+        amount: req.body.amount,
+        id: req.params.id
+    });
+
+    Payment.update(payment,(err,data)=>{
+        if(err){
+            res.status(500).send({message: err.message || "Send error report"});
+        }else{
+            res.json(data);
+        }
+    });
+};
