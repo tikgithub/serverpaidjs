@@ -110,7 +110,9 @@ function getTime() {
 };
 
 Payment.update = (updateData, result) => {
-    sql.query("Update payment set item=?, pay_date=?, detail=?, photo=?, email=?, amount=? where id=?", [
+    console.log(updateData);
+    sql.query("Update payment set item=?, pay_date=?, detail=?, photo=?, email=?, amount=? where id=?", 
+    [
         updateData.item,
         updateData.pay_date,
         updateData.detail,
@@ -118,9 +120,15 @@ Payment.update = (updateData, result) => {
         updateData.email,
         updateData.amount,
         updateData.id
-    ], (err, data) => {
+    ],
+    (err, data) => {
+        if(err){
+            console.log("Erorr ", err);
+            result(null, err);
+            return; 
+        }
         console.log("Payment data update succesful", { return: data });
-        result(null, data);
+        result(null, err);
     });
 }
 

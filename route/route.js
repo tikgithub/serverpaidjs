@@ -14,7 +14,7 @@ module.exports = app => {
     const userController = require("../controller/user.controller.js");
 
     var interceptFunc = (function (req, res, next) {
-        console.log("Token " + req.headers.authorization);
+        //console.log("Token " + req.headers.authorization);
         //Check the token is exsit ??
         var authorization = req.headers.authorization; // assign the token string to variable
         //check if the token is exist?
@@ -31,7 +31,7 @@ module.exports = app => {
 
         admin.auth().verifyIdToken(authorization).then((decodedToken)=>{
             const uid = decodedToken.uid;
-            console.log("UID for token " + uid);
+           // console.log("UID for token " + uid);
             //get email from token
             res.locals.emailSession = decodedToken.email;
             next();

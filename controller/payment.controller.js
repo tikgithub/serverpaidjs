@@ -81,9 +81,9 @@ exports.create = (req, res) => {
 
 exports.update = (req, res) => {
     let email = res.locals.emailSession;
-    
     if(req.body.item == undefined){
         res.status(400).send({message:"Content Type Problem!!"});
+        return;
     }
 
     //Create Payment Object
@@ -96,9 +96,6 @@ exports.update = (req, res) => {
         amount: req.body.amount,
         id: req.params.id
     });
-
-    console.log(payment);
-
     Payment.update(payment,(err,data)=>{
         if(err){
             res.status(500).send({message: err.message || "Send error report"});
