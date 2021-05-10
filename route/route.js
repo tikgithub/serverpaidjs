@@ -1,6 +1,7 @@
 var admin = require('firebase-admin');
 var serviceAccount = require('../config/mypaied-firebase-adminsdk-mvxb4-f584f6f949.json');
 
+
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://mypaied-default-rtdb.firebaseio.com"
@@ -12,6 +13,7 @@ module.exports = app => {
     const paymentController = require('../controller/payment.controller.js');
     const registerController = require("../controller/register.controller.js");
     const userController = require("../controller/user.controller.js");
+    const loginController = require("../controller/weblogin.controller");
 
     var interceptFunc = (function (req, res, next) {
         //console.log("Token " + req.headers.authorization);
@@ -59,4 +61,7 @@ module.exports = app => {
     app.post("/api/register", registerController.create);
     //User route
     app.get("/api/user/getUserbyEmail", interceptFunc,userController.login);
+
+    //Login route
+    app.post("/api/web/auth",loginController.login);
 }

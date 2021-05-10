@@ -1,0 +1,9 @@
+{
+    "apiKey": "AIzaSyBlnLNZQF5EqOBxBNXF150IDU8jaVgmoWg",
+    "authDomain": "mypaied.firebaseapp.com",
+    "databaseURL": "https://mypaied-default-rtdb.firebaseio.com",
+    "projectId": "mypaied",
+    "storageBucket": "mypaied.appspot.com",
+    "messagingSenderId": "29762449036",
+    "appId": "1:29762449036:web:85e6ddc823f04e9987d5a9"
+  }
