@@ -56,7 +56,6 @@ module.exports = app => {
     app.put("/api/payment/:id", interceptFunc, paymentController.update);
     app.delete("/api/payment/:id", interceptFunc, paymentController.delete);
     
-
     //Register route
     app.post("/api/register", registerController.create);
     //User route
